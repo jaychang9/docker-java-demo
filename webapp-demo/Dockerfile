@@ -1,7 +1,8 @@
 FROM tomcat:8.5-jre8-alpine
 MAINTAINER zhangjie <zhangjie@zcckj.com>
 ARG WAR_FILE
-ADD ${WAR_FILE} ./webapp/ROOT.war
+RUN rm -r ./webapps/*
+ADD ${WAR_FILE} ./webapps/ROOT.war
 # Configure ustc alipine software source and timezone
 RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /etc/apk/repositories && \
     apk update && \
