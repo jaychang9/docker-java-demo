@@ -11,6 +11,6 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" >  /etc/timezone &&\
     rm -rf /var/cache/apk/* && \
-    cd ${PROJECT_NAME}
+    cd ${PROJECT_NAME} && ls -l && \
 EXPOSE ${SERVER_PORT}
-CMD["/bin/sh","./bin/start.sh"]
+CMD["sh","./bin/start.sh"]
