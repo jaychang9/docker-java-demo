@@ -13,7 +13,9 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     echo "Asia/Shanghai" >  /etc/timezone &&\
     rm -rf /var/cache/apk/* && rm -rf /${FILE} && \
     cd ${PROJECT_NAME}/bin && \
-    ls -l && chmod 755 *.sh
+    export PATH=$PATH:/${PROJECT_NAME}/bin && \
+    echo $PATH && \
+    chmod 755 *.sh
 EXPOSE ${SERVER_PORT}
 
-ENTRYPOINT [ "/bin/sh","start.sh" ]
+ENTRYPOINT [ "start.sh" ]
