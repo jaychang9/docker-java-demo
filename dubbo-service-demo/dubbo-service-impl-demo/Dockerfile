@@ -15,4 +15,4 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     cd ${PROJECT_NAME}
 EXPOSE ${SERVER_PORT}
 
-CMD ["/bin/sh","./bin/start.sh"]
+CMD ["/bin/sh","/${PROJECT_NAME}/bin/start.sh"]
