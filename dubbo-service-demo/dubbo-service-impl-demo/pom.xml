@@ -22,6 +22,7 @@
         <zkclient.version>0.10</zkclient.version>
         <spring.version>4.3.13.RELEASE</spring.version>
         <docker.image.prefix>10.1.221.82:5000/zc</docker.image.prefix>
+        <server.port>20880</server.port>
     </properties>
 
     <dependencies>
@@ -96,6 +97,7 @@
                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
                    <buildArgs>
                        <FILE>target/${project.build.finalName}.tar.gz</FILE>
+                       <SERVER_PORT>${server.port}</SERVER_PORT>
                    </buildArgs>
                    <tag>${project.version}</tag>
                </configuration>
