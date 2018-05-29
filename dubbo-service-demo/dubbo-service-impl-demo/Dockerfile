@@ -14,4 +14,4 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     rm -rf /var/cache/apk/* && rm -rf /${FILE} && \
     cd ${PROJECT_NAME}
 EXPOSE ${SERVER_PORT}
-CMD["sh","./bin/start.sh"]
+CMD["${PROJECT_NAME}/bin/start.sh"]
