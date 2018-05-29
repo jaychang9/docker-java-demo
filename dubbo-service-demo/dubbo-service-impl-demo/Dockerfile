@@ -15,4 +15,4 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     cd ${PROJECT_NAME}/bin
 EXPOSE ${SERVER_PORT}
 
-CMD ["/bin/sh","/dubbo-service-impl-demo/bin/start.sh"]
+CMD ["start.sh"]
