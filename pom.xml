@@ -16,5 +16,7 @@
   <modules>
     <module>springboot-demo</module>
     <module>webapp-demo</module>
+    <module>dubbo-service-api-demo</module>
+    <module>dubbo-service-impl-demo</module>
   </modules>
 </project>

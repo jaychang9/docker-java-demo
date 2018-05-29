@@ -30,7 +30,7 @@
                 <configuration>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
                     <buildArgs>
-                        <WAR_FILE>target/${project.build.finalName}.${packaging}</WAR_FILE>
+                        <FILE>target/${project.build.finalName}.${packaging}</FILE>
                     </buildArgs>
                     <tag>${project.version}</tag>
                 </configuration>

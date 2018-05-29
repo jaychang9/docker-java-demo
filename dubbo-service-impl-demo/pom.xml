@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>docker-java-demo</artifactId>
+        <groupId>cn.jaychang</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>dubbo-service-impl-demo</artifactId>
+
+    <name>dubbo-service-impl-demo</name>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <dubbo.version>2.5.3</dubbo.version>
+        <zkclient.version>0.10</zkclient.version>
+        <spring.version>4.3.13.RELEASE</spring.version>
+        <docker.image.prefix>10.1.221.82:5000/zc</docker.image.prefix>
+    </properties>
+
+    <dependencies>
+        <!-- second part lib -->
+        <dependency>
+            <groupId>cn.jaychang</groupId>
+            <artifactId>dubbo-service-api-demo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- third part lib -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.5.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>${zkclient.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+       <resources>
+           <resource>
+               <directory>src/main/resources</directory>
+               <includes>
+                   <include>spring/**/*.xml</include>
+               </includes>
+           </resource>
+       </resources>
+       <plugins>
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-assembly-plugin</artifactId>
+               <version>3.1.0</version>
+               <executions>
+                   <execution>
+                       <id>make-binary-package</id>
+                       <phase>package</phase>
+                       <goals>
+                           <goal>single</goal>
+                       </goals>
+                       <configuration>
+                           <finalName>${project.build.finalName}</finalName>
+                           <appendAssemblyId>false</appendAssemblyId>
+                           <descriptors>
+                               <descriptor>src/assembly/assembly-descriptor.xml</descriptor>
+                           </descriptors>
+                       </configuration>
+                   </execution>
+               </executions>
+           </plugin>
+           <plugin>
+               <groupId>com.spotify</groupId>
+               <artifactId>dockerfile-maven-plugin</artifactId>
+               <version>1.4.2</version>
+               <configuration>
+                   <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                   <buildArgs>
+                       <FILE>target/${project.build.finalName}.tar.gz</FILE>
+                   </buildArgs>
+                   <tag>${project.version}</tag>
+               </configuration>
+               <executions>
+                   <execution>
+                       <id>default</id>
+                       <phase>package</phase>
+                       <goals>
+                           <goal>build</goal>
+                           <goal>push</goal>
+                           <goal>tag</goal>
+                       </goals>
+                   </execution>
+               </executions>
+           </plugin>
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-deploy-plugin</artifactId>
+               <configuration>
+                   <skip>true</skip>
+               </configuration>
+           </plugin>
+       </plugins>
+    </build>
+</project>
