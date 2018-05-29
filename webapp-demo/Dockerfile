@@ -1,7 +1,7 @@
 FROM tomcat:8.5-jre8-alpine
 MAINTAINER zhangjie <zhangjie@zcckj.com>
 ARG WAR_FILE
-ADD ${WAR_FILE} ROOT.war
+ADD ${WAR_FILE} ./webapp/ROOT.war
 # Configure ustc alipine software source and timezone
 RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /etc/apk/repositories && \
     apk update && \
@@ -9,4 +9,3 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" >  /etc/timezone &&\
     rm -rf /var/cache/apk/*
-EXPOSE 8080
