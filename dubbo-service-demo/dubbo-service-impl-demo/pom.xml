@@ -98,6 +98,7 @@
                    <buildArgs>
                        <FILE>target/${project.build.finalName}.tar.gz</FILE>
                        <SERVER_PORT>${server.port}</SERVER_PORT>
+                       <PROJECT_NAME>${project.artifactId}</PROJECT_NAME>
                    </buildArgs>
                    <tag>${project.version}</tag>
                </configuration>
