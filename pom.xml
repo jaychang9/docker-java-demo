@@ -15,10 +15,6 @@
 
   <modules>
     <module>springboot-demo</module>
+    <module>webapp-demo</module>
   </modules>
-
-
-
-
-
 </project>
