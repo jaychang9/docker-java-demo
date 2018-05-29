@@ -13,5 +13,4 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     rm -rf /var/cache/apk/* && \
     cd ${PROJECT_NAME}
 EXPOSE ${SERVER_PORT}
-# To reduce Tomcat startup time we added a system property pointing to "/dev/urandom" as a source of entropy.
-CMD["./bin/start.sh"]
+CMD["/bin/sh","./bin/start.sh"]
