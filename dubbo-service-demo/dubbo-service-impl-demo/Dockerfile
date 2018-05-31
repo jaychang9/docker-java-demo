@@ -17,3 +17,4 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     echo $PATH && \
     chmod 755 *.sh
 EXPOSE ${SERVER_PORT}
+CMD ["start.sh"]
