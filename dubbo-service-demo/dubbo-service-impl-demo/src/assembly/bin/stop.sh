@@ -21,14 +21,14 @@ fi
 #    $BIN_DIR/dump.sh
 #fi
 
-echo "Stopping the $SERVICE_NAME ...\c"
+echo -e "Stopping the $SERVICE_NAME ...\c"
 for PID in $PIDS ; do
     kill $PID > /dev/null 2>&1
 done
 
 COUNT=0
 while [ $COUNT -lt 1 ]; do
-    echo ".\c"
+    echo -e ".\c"
     sleep 1
     COUNT=1
     for PID in $PIDS ; do

@@ -1,5 +1,5 @@
 #!/bin/sh
-./setenv.sh
+source ./setenv.sh
 cd `dirname $0`
 BIN_DIR=`pwd`
 cd ..
@@ -64,14 +64,14 @@ else
     JAVA_MEM_OPTS=" -server -Xms256m -Xmx512m -XX:PermSize=128m -XX:SurvivorRatio=2 -XX:+UseParallelGC "
 fi
 
-echo "Starting the $SERVICE_NAME ...\c"
+echo -e "Starting the $SERVICE_NAME ...\c"
 #nohup java $JAVA_OPTS $JAVA_MEM_OPTS $JAVA_DEBUG_OPTS $JAVA_JMX_OPTS -classpath $CONF_DIR:$LIB_JARS com.alibaba.dubbo.container.Main > $STDOUT_FILE 2>&1 &
 
 java $JAVA_OPTS $JAVA_MEM_OPTS $JAVA_DEBUG_OPTS $JAVA_JMX_OPTS -classpath $CONF_DIR:$LIB_JARS com.alibaba.dubbo.container.Main
 
 COUNT=0
 while [ $COUNT -lt 1 ]; do
-    echo ".\c"
+    echo -e ".\c"
     sleep 1
     if [ -n "$SERVER_PORT" ]; then
         if [ "$SERVER_PROTOCOL" == "dubbo" ]; then
