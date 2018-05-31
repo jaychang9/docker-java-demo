@@ -18,4 +18,4 @@ RUN set -x && \
 VOLUME /${PROJECT_NAME}/conf
 VOLUME /${PROJECT_NAME}/logs
 EXPOSE ${SERVER_PORT}
-CMD ["/${PROJECT_NAME}/bin/start.sh"]
+CMD ["./bin/start.sh"]

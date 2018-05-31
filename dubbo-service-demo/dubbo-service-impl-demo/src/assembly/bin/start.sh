@@ -1,10 +1,11 @@
 #!/bin/sh
-source ./setenv.sh
 cd `dirname $0`
 BIN_DIR=`pwd`
 cd ..
 DEPLOY_DIR=`pwd`
 CONF_DIR=$DEPLOY_DIR/conf
+
+source $BIN_DIR/setenv.sh
 
 #USER=dubbo
 #GROUP=dubbo
