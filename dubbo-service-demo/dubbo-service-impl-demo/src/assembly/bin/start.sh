@@ -28,7 +28,7 @@ if [ -n "$PIDS" ]; then
 fi
 
 if [ -n "$SERVER_PORT" ]; then
-    SERVER_PORT_COUNT=`netstat -tln | grep $SERVER_PORT | wc -l`
+    SERVER_PORT_COUNT=`netstat -tln | grep :$SERVER_PORT | wc -l`
     if [ $SERVER_PORT_COUNT -gt 0 ]; then
         echo "ERROR: The $SERVICE_NAME port $SERVER_PORT already used!"
         exit 1
@@ -77,7 +77,7 @@ while [ $COUNT -lt 1 ]; do
         if [ "$SERVER_PROTOCOL" == "dubbo" ]; then
             COUNT=`echo status | nc -i 1 127.0.0.1 $SERVER_PORT | grep -c OK`
         else
-            COUNT=`netstat -an | grep $SERVER_PORT | wc -l`
+            COUNT=`netstat -an | grep :$SERVER_PORT | wc -l`
         fi
     else
         COUNT=`ps -f | grep java | grep "$DEPLOY_DIR" | awk '{print $2}' | wc -l`
