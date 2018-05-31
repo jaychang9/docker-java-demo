@@ -16,5 +16,7 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     export PATH=$PATH:/${PROJECT_NAME}/bin && \
     echo $PATH && \
     chmod 755 *.sh
+VOLUME /${PROJECT_NAME}/conf
+VOLUME /${PROJECT_NAME}/logs
 EXPOSE ${SERVER_PORT}
 CMD ["start.sh"]
