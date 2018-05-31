@@ -14,9 +14,7 @@ RUN set -x && \
     echo "Asia/Shanghai" >  /etc/timezone &&\
     rm -rf /var/cache/apk/* && rm -rf /${FILE} && \
     cd /${PROJECT_NAME}/bin && \
-    export PATH=$PATH:/${PROJECT_NAME}/bin && \
-    echo $PATH && \
-    chmod 755 *.sh
+    chmod +x *.sh
 VOLUME /${PROJECT_NAME}/conf
 VOLUME /${PROJECT_NAME}/logs
 EXPOSE ${SERVER_PORT}
