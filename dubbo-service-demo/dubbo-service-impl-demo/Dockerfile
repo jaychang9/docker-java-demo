@@ -18,4 +18,4 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     chmod 755 *.sh
 EXPOSE ${SERVER_PORT}
 
-ENTRYPOINT [ "/bin/sh","start.sh" ]
+ENTRYPOINT [ "/bin/sh" ]
