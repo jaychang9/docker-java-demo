@@ -4,7 +4,7 @@ ARG FILE
 ARG SERVER_PORT
 ARG PROJECT_NAME
 WORKDIR /${PROJECT_NAME}
-ADD ${FILE} ./
+ADD ${FILE} /
 # Configure ustc alipine software source and timezone
 RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /etc/apk/repositories && \
     apk update && \
@@ -12,10 +12,8 @@ RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /et
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" >  /etc/timezone &&\
     rm -rf /var/cache/apk/* && rm -rf /${FILE} && \
-    cd ${PROJECT_NAME}/bin && \
+    cd /${PROJECT_NAME}/bin && \
     export PATH=$PATH:/${PROJECT_NAME}/bin && \
     echo $PATH && \
     chmod 755 *.sh
 EXPOSE ${SERVER_PORT}
-
-ENTRYPOINT [ "/bin/sh" ]
