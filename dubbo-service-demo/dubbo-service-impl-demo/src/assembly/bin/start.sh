@@ -5,8 +5,6 @@ cd ..
 DEPLOY_DIR=`pwd`
 CONF_DIR=$DEPLOY_DIR/conf
 
-source $BIN_DIR/setenv.sh
-
 #USER=dubbo
 #GROUP=dubbo
 
