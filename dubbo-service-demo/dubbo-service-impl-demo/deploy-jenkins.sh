@@ -2,6 +2,16 @@
 set -e
 set -u
 
+DEFAULT_DEPLOY_DIR=/srv/dubbo
+
+if [ ! -z $1 ]; then
+    DEFAULT_DEPLOY_DIR=$1
+    if [ ! -d $DEFAULT_DEPLOY_DIR ]; then
+        mkdir -p $DEFAULT_DEPLOY_DIR
+    fi
+fi
+
+
 cd `dirname $0`
 
 if [ $# -lt 1 ];then

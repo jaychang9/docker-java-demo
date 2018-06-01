@@ -18,7 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <docker.image.prefix>10.1.221.82:5000/zc</docker.image.prefix>
+        <docker.image.prefix>registry.zcckj.in/demo</docker.image.prefix>
     </properties>
 
     <build>
