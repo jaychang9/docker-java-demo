@@ -1,9 +1,6 @@
 #!/bin/sh
 # Make sure prerequisite environment variables are set
 
-JAVA_HOME=`env|grep JAVA_HOME | awk -F '=' '/JAVA_HOME/{print $2}'`
-JRE_HOME=`env|grep JRE_HOME | awk -F '=' '/JAVA_HOME/{print $2}'`
-
 if [ -z "$JAVA_HOME" -a -z "$JRE_HOME" ]; then
   if $darwin; then
     # Bugzilla 54390
