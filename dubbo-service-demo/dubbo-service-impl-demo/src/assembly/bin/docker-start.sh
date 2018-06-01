@@ -75,29 +75,4 @@ fi
 
 echo -e "Starting the $SERVICE_NAME ...\c"
 
-nohup java $JAVA_OPTS $JAVA_MEM_OPTS $JAVA_DEBUG_OPTS $JAVA_JMX_OPTS -classpath $CONF_DIR:$LIB_JARS com.alibaba.dubbo.container.Main > $STDOUT_FILE 2>&1 &
-
-COUNT=0
-while [ $COUNT -lt 1 ]; do
-    echo -e ".\c"
-    sleep 1
-    if [ -n "$SERVER_PORT" ]; then
-        if [ "$SERVER_PROTOCOL" == "dubbo" ]; then
-            WHICH_NC = `which nc`
-            if [ x$WHICH_NC = "x" -o x${WHICH_NC:0:14} = "x/usr/bin/which" ]; then
-                COUNT=`netstat -an | grep :$SERVER_PORT | wc -l`
-            else
-                COUNT=`echo status | nc -i 1 127.0.0.1 $SERVER_PORT | grep -c OK`
-            fi
-        else
-            COUNT=`netstat -an | grep :$SERVER_PORT | wc -l`
-        fi
-    else
-        COUNT=`ps -f | grep java | grep "$DEPLOY_DIR" | awk '{print $2}' | wc -l`
-    fi
-done
-
-echo "OK!"
-PIDS=`ps -f | grep java | grep "$DEPLOY_DIR" | awk '{print $2}'`
-echo "PID: $PIDS"
-echo "STDOUT: $STDOUT_FILE"
+java $JAVA_OPTS $JAVA_MEM_OPTS $JAVA_DEBUG_OPTS $JAVA_JMX_OPTS -classpath $CONF_DIR:$LIB_JARS com.alibaba.dubbo.container.Main

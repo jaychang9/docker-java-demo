@@ -6,7 +6,7 @@ ARG PROJECT_NAME
 WORKDIR /${PROJECT_NAME}
 ADD ${FILE} /
 # Configure ustc alipine software source and timezone
-RUN set -x && \
+RUN set -e && \
     sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /etc/apk/repositories && \
     apk update && \
     apk --no-cache add tzdata && \
@@ -18,4 +18,4 @@ RUN set -x && \
 VOLUME /${PROJECT_NAME}/conf
 VOLUME /${PROJECT_NAME}/logs
 EXPOSE ${SERVER_PORT}
-CMD ["./bin/start.sh","docker"]
+CMD ["./bin/docker-start.sh"]

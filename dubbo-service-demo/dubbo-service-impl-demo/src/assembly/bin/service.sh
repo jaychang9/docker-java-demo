@@ -1,24 +1,45 @@
 #!/bin/sh
 cd `dirname $0`
-if [ "$1" = "start" ]; then
+set -e
+
+start() {
     ./start.sh
-else
-    if [ "$1" = "stop" ]; then
-        ./stop.sh
-    else
-        if [ "$1" = "debug" ]; then
-            ./start.sh debug
-        else
-            if [ "$1" = "restart" ]; then
-                ./restart.sh
-            else
-                if [ "$1" = "dump" ]; then
-                    ./dump.sh
-                else
-                    echo "ERROR: Please input argument: start or stop or debug or restart or dump"
-                    exit 1
-                fi
-            fi
-        fi
-    fi
-fi
+}
+
+debug() {
+    ./start.sh debug
+}
+
+stop() {
+    ./stop.sh
+}
+
+restart() {
+   ./restart.sh
+}
+
+dump() {
+   ./dump.sh
+}
+
+case "$1" in
+    'start')
+        start
+        ;;
+    'stop')
+        stop
+        ;;
+    'debug')
+        debug
+        ;;
+    'dump')
+        dump
+        ;;
+    'restart')
+        restart
+        ;;
+    *)
+    echo "usage: $0 {start|stop|restart|debug|dump}"
+    exit 1
+    ;;
+esac

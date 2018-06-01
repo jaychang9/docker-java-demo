@@ -5,11 +5,12 @@ ARG JAVA_OPTTS
 ARG SERVER_PORT
 ADD ${FILE} app.jar
 # Configure ustc alipine software source and timezone
-RUN sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /etc/apk/repositories && \
+RUN set -e && \
+    sed -i "s#http://dl-cdn.alpinelinux.org/#https://mirrors.ustc.edu.cn/#g" /etc/apk/repositories && \
     apk update && \
     apk --no-cache add tzdata && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" >  /etc/timezone &&\
+    echo "Asia/Shanghai" >  /etc/timezone && \
     rm -rf /var/cache/apk/*
 EXPOSE ${SERVER_PORT}
 # To reduce Tomcat startup time we added a system property pointing to "/dev/urandom" as a source of entropy.
