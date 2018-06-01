@@ -5,6 +5,8 @@ cd ..
 DEPLOY_DIR=`pwd`
 CONF_DIR=$DEPLOY_DIR/conf
 
+echo `env`
+
 #USER=dubbo
 #GROUP=dubbo
 
