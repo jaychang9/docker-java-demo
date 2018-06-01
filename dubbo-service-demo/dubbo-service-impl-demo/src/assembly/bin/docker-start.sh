@@ -10,12 +10,18 @@ source $BIN_DIR/setenv.sh
 #USER=dubbo
 #GROUP=dubbo
 
-SERVICE_NAME=`sed '/dubbo.application.name/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
-#SERVER_PROTOCOL=`sed '/dubbo.protocol.name/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
-SERVER_PORT=`sed '/dubbo.protocol.port/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
-#LOGS_FILE=`sed '/dubbo.log4j.file/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
+SERVICE_NAME=""
+SERVER_PORT=""
 SERVER_PROTOCOL=""
-LOGS_FILE=""
+#LOGS_FILE=""
+
+if [ -f conf/dubbo.properties ]; then
+    SERVICE_NAME=`sed '/dubbo.application.name/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
+    SERVER_PROTOCOL=`sed '/dubbo.protocol.name/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
+    SERVER_PORT=`sed '/dubbo.protocol.port/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
+    #LOGS_FILE=`sed '/dubbo.log4j.file/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
+fi
+
 
 if [ -z "$SERVICE_NAME" ]; then
     SERVICE_NAME=`pwd |xargs basename`
@@ -42,7 +48,7 @@ if [ ! -d $LOGS_DIR ]; then
     mkdir -p $LOGS_DIR
     #chown -R $USER.$GROUP $LOGS_DIR
 fi
-STDOUT_FILE=$LOGS_DIR/$SERVICE_NAME.log
+STDOUT_FILE=$LOGS_DIR/stdout.log
 
 LIB_DIR=$DEPLOY_DIR/lib
 LIB_JARS=`ls $LIB_DIR|grep .jar|awk '{print "'$LIB_DIR'/"$0}'|tr "\n" ":"`
