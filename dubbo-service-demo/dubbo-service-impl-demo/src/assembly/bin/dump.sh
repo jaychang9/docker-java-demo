@@ -5,8 +5,12 @@ cd ..
 DEPLOY_DIR=`pwd`
 CONF_DIR=$DEPLOY_DIR/conf
 
-SERVICE_NAME=`sed '/dubbo.application.name/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
-LOGS_FILE=`sed '/dubbo.log4j.file/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
+SERVICE_NAME=""
+LOGS_FILE=""
+if [ -f conf/dubbo.properties ]; then
+    SERVICE_NAME=`sed '/dubbo.application.name/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
+    LOGS_FILE=`sed '/dubbo.log4j.file/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
+fi
 
 if [ -z "$SERVER_NAME" ]; then
     SERVER_NAME=`pwd |xargs basename`

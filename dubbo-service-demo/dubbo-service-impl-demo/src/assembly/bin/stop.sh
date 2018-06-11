@@ -5,7 +5,10 @@ cd ..
 DEPLOY_DIR=`pwd`
 CONF_DIR=$DEPLOY_DIR/conf
 
-SERVICE_NAME=`sed '/dubbo.application.name/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
+SERVICE_NAME=""
+if [ -f conf/dubbo.properties ]; then
+    SERVICE_NAME=`sed '/dubbo.application.name/!d;s/.*=//' conf/dubbo.properties | tr -d 'r'`
+fi
 
 if [ -z "$SERVICE_NAME" ]; then
     SERVICE_NAME=`pwd |xargs basename`
