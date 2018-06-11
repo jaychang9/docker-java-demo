@@ -14,7 +14,7 @@ if [ -z "$SERVICE_NAME" ]; then
     SERVICE_NAME=`pwd |xargs basename`
 fi
 
-PIDS=`ps -f | grep java | grep "$CONF_DIR" |awk '{print $2}'`
+PIDS=`ps -ef | grep java | grep "$CONF_DIR" |awk '{print $2}'`
 if [ -z "$PIDS" ]; then
     echo "ERROR: The $SERVICE_NAME does not started!"
     exit 1
