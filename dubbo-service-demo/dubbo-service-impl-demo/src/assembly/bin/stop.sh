@@ -20,9 +20,9 @@ if [ -z "$PIDS" ]; then
     exit 1
 fi
 
-#if [ "$1" != "skip" ]; then
-#    $BIN_DIR/dump.sh
-#fi
+if [ "$1" = "dump" ]; then
+    $BIN_DIR/dump.sh
+fi
 
 echo -e "Stopping the $SERVICE_NAME ...\c"
 for PID in $PIDS ; do
