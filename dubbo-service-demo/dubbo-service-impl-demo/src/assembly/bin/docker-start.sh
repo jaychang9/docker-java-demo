@@ -55,6 +55,7 @@ LIB_JARS=`ls $LIB_DIR|grep .jar|awk '{print "'$LIB_DIR'/"$0}'|tr "\n" ":"`
 
 
 JAVA_OPTS=" -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true "
+
 JAVA_DEBUG_OPTS=""
 if [ "$1" = "debug" ]; then
     if [ -z "$2" ]; then
@@ -67,10 +68,20 @@ if [ "$1" = "debug" ]; then
     fi
     JAVA_DEBUG_OPTS=" -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=$2,server=y,suspend=n "
 fi
+
 JAVA_JMX_OPTS=""
 if [ "$1" = "jmx" ]; then
+    if [ -z "$2" ]; then
+        echo "Missing parameter jmx port!"
+        exit 1
+    fi
+    if echo "$2" | grep -v '^[0-9]\+$'; then
+        echo "Parameter $2 as jmx port must be a number!"
+        exit 1
+    fi
     JAVA_JMX_OPTS=" -Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false "
 fi
+
 JAVA_MEM_OPTS=""
 BITS=`java -version 2>&1 | grep -i 64-bit`
 if [ -n "$BITS" ]; then
